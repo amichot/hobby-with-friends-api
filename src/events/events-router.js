@@ -6,7 +6,6 @@ const logger = require('../logger');
 
 const eventsRouter = express.Router();
 const bodyParser = express.json();
-const {getEventValidationError} = require('./event-validator');
 
 const serializeEvent = event => ({
   id: event.id,
@@ -56,8 +55,6 @@ eventsRouter
         });
       }
     }
-
-    const error = getEventValidationError(newEvent);
 
     if (error) return res.status(400).send(error);
 
@@ -142,8 +139,6 @@ eventsRouter
         },
       });
     }
-
-    const error = getEventValidationError(eventToUpdate);
 
     if (error) return res.status(400).send(error);
 
