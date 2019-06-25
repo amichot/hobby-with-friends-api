@@ -1,4 +1,7 @@
+const path = require('path');
 const express = require('express');
+
+const EventUsersService = require('../event-users/event-users-service');
 const EventsService = require('./events-service');
 const xss = require('xss');
 
@@ -9,13 +12,13 @@ const bodyParser = express.json();
 
 const serializeEvent = event => ({
   id: event.id,
-  owner: xss(event.owner),
+  owner_id: Number(event.owner_id),
+  owner_name: xss(event.owner_name),
   name: xss(event.name),
-  tags: xss(event.tags),
-  location: xss(event.description),
-  date: event.date,
+  type: xss(event.type),
+  location: xss(event.location),
+  date: Number(event.date),
   information: xss(event.information),
-  attending: xss(event.attending),
 });
 
 eventsRouter
@@ -23,31 +26,27 @@ eventsRouter
   .get((req, res, next) => {
     EventsService.getAllEvents(req.app.get('db'))
       .then(events => {
-        res.json(events.map(EventsService.serializeEvent));
+        res.json(events.rows.map(serializeEvent));
       })
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
-    const {
-      owner,
-      name,
-      tags,
-      location,
-      date,
-      information,
-      attending,
-    } = req.body;
+    const {name, type, location, information} = req.body;
+    const date = Number(req.body.date);
     const newEvent = {
-      owner,
       name,
-      tags,
+      type,
       location,
       date,
       information,
-      attending,
     };
 
-    for (const field of [owner, name, tags, location, date, information]) {
+    for (const field of [
+      'name',
+      'type',
+      'location',
+      'date',
+    ]) {
       if (!newEvent[field]) {
         logger.error(`${field} is required`);
         return res.status(400).send({
@@ -56,35 +55,40 @@ eventsRouter
       }
     }
 
-    if (error) return res.status(400).send(error);
-
     EventsService.insertEvent(req.app.get('db'), newEvent)
       .then(event => {
+        const newEventUser = {
+          event_id: event.id,
+          user_id: 1,
+          role_id: 1,
+        };
+
+        EventUsersService.insertEventUser(
+          req.app.get('db'),
+          newEventUser
+        );
         logger.info(`Event with id ${event.id} created.`);
         res
           .status(201)
-          .location(path.posix.join(req.originalUrl, `${event.id}`))
+          .location(
+            path.posix.join(req.originalUrl, `${event.id}`)
+          )
           .json(serializeEvent(event));
       })
       .catch(next);
   });
 
 eventsRouter
-  .route('/:event_id')
-  .all(checkEventExists)
-  .get((req, res) => {
-    res.json(EventsService.serializeEvent(res.event));
-  });
-
-eventsRouter
-  .route('/:event_id')
+  .route('/id/:event_id')
 
   .all((req, res, next) => {
     const {event_id} = req.params;
     EventsService.getById(req.app.get('db'), event_id)
       .then(event => {
         if (!event) {
-          logger.error(`Event with id ${event_id} not found.`);
+          logger.error(
+            `Event with id ${event_id} not found.`
+          );
           return res.status(404).json({
             error: {message: `Event Not Found`},
           });
@@ -112,35 +116,34 @@ eventsRouter
 
   .patch(bodyParser, (req, res, next) => {
     const {
-      owner,
       name,
-      tags,
+      type,
       location,
       date,
       information,
-      attending,
     } = req.body;
+
     const eventToUpdate = {
-      owner,
       name,
-      tags,
+      type,
       location,
       date,
       information,
-      attending,
     };
 
-    const numberOfValues = Object.values(eventToUpdate).filter(Boolean).length;
+    const numberOfValues = Object.values(
+      eventToUpdate
+    ).filter(Boolean).length;
     if (numberOfValues === 0) {
-      logger.error(`Invalid update without required fields`);
+      logger.error(
+        `Invalid update without required fields`
+      );
       return res.status(400).json({
         error: {
-          message: `Request body must contain either owner, name, tags, location, information, attending`,
+          message: `Request body must contain either owner, name, type, location, information, attending`,
         },
       });
     }
-
-    if (error) return res.status(400).send(error);
 
     EventsService.updateEvent(
       req.app.get('db'),
@@ -149,6 +152,24 @@ eventsRouter
     )
       .then(numRowsAffected => {
         res.status(204).end();
+      })
+      .catch(next);
+  });
+
+eventsRouter
+  .route('/filter')
+  .get(bodyParser, (req, res, next) => {
+    const {name, type, location} = req.body;
+    const date = Number(req.body.date);
+    const criteria = {
+      name,
+      type,
+      location,
+      date,
+    };
+    EventsService.filterEvents(req.app.get('db'), criteria)
+      .then(events => {
+        res.json(events.rows.map(serializeEvent));
       })
       .catch(next);
   });

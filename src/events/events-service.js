@@ -1,6 +1,15 @@
 const EventsService = {
   getAllEvents(knex) {
-    return knex.select('*').from('events');
+    return knex.raw(
+      `SELECT e.id, u.id as "owner_id", u.name as "owner_name", e.name, e."type", e."location", e."date", e.information
+       FROM events as e
+       JOIN event_users as eu
+       ON e.id = eu.event_id
+       JOIN users as u 
+       ON eu.user_id = u.id AND eu.event_id = e.id
+       WHERE eu.role_id = 1;
+       `
+    );
   },
   getById(knex, id) {
     return knex
@@ -27,6 +36,24 @@ const EventsService = {
     return knex('events')
       .where({id})
       .update(newEventFields);
+  },
+  filterEvents(knex, criteria) {
+    console.log(criteria);
+    return knex.raw(
+      `SELECT e.id, u.id as "owner_id", u.name as "owner_name", e.name, e."type", e."location", e."date", e.information
+       FROM events as e
+       JOIN event_users as eu
+       ON e.id = eu.event_id
+       JOIN users as u 
+       ON eu.user_id = u.id 
+       AND eu.event_id = e.id
+       WHERE eu.role_id = 1
+       AND e.name ilike '%${criteria.name}%'
+       AND e."type" ilike '%${criteria.type}%'
+       AND e."location" ilike '%${criteria.location}%'
+       AND e."date" >= ${criteria.date};
+    `
+    );
   },
 };
 

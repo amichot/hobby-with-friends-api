@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const UsersService = require('./users-service');
 const xss = require('xss');
@@ -10,11 +11,11 @@ const bodyParser = express.json();
 const serializeUser = user => ({
   id: user.id,
   name: xss(user.name),
-  'full-name': xss(user['full-name']),
-  tags: xss(user.tags),
+  full_name: xss(user['full_name']),
+  type: xss(user.type),
   location: xss(user.location),
-  email: user.email,
-  'about-me': xss(user['about-me']),
+  email: xss(user.email),
+  about_me: xss(user['about_me']),
 });
 
 usersRouter
@@ -22,29 +23,28 @@ usersRouter
   .get((req, res, next) => {
     UsersService.getAllUsers(req.app.get('db'))
       .then(users => {
-        res.json(users.map(UsersService.serializeUser));
+        res.json(users.map(serializeUser));
       })
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
-    const {name, fullName, tags, location, email, aboutMe} = req.body;
+    const {full_name, type, location, email, about_me} = req.body;
+    const name = req.body['name'];
     const newUser = {
       name,
-      fullName,
-      tags,
+      full_name,
+      type,
       location,
       email,
-      aboutMe,
+      about_me,
     };
 
-    if (!newUser[name]) {
-      logger.error(`${name} is required`);
+    if (!newUser['name']) {
+      logger.error(`name is required`);
       return res.status(400).send({
-        error: {message: `'${field}' is required`},
+        error: {message: `name is required`},
       });
     }
-
-    if (error) return res.status(400).send(error);
 
     UsersService.insertUser(req.app.get('db'), newUser)
       .then(user => {
@@ -55,13 +55,6 @@ usersRouter
           .json(serializeUser(user));
       })
       .catch(next);
-  });
-
-usersRouter
-  .route('/:user_id')
-  .all(checkUserExists)
-  .get((req, res) => {
-    res.json(UsersService.serializeUser(res.user));
   });
 
 usersRouter
@@ -99,14 +92,14 @@ usersRouter
   })
 
   .patch(bodyParser, (req, res, next) => {
-    const {name, fullName, tags, location, email, aboutMe} = req.body;
-    const newUser = {
+    const {name, full_name, type, location, email, about_me} = req.body;
+    const userToUpdate = {
       name,
-      fullName,
-      tags,
+      full_name,
+      type,
       location,
       email,
-      aboutMe,
+      about_me,
     };
 
     const numberOfValues = Object.values(userToUpdate).filter(Boolean).length;
@@ -114,12 +107,10 @@ usersRouter
       logger.error(`Invalid update without required fields`);
       return res.status(400).json({
         error: {
-          message: `Request body must contain either owner, name, tags, location, information, attending`,
+          message: `Request body must contain either owner, name, type, location, information, attending`,
         },
       });
     }
-
-    if (error) return res.status(400).send(error);
 
     UsersService.updateUser(req.app.get('db'), req.params.user_id, userToUpdate)
       .then(numRowsAffected => {
