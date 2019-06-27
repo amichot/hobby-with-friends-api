@@ -4,4 +4,6 @@ module.exports = {
   DB_URL:
     process.env.DB_URL ||
     'postgresql://dunder-mifflin:1@localhost/hobby-with-friends',
+  JWT_SECRET:
+    process.env.JWT_SECRET || 'change-this-secret',
 };

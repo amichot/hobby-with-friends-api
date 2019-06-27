@@ -38,7 +38,6 @@ const EventsService = {
       .update(newEventFields);
   },
   filterEvents(knex, criteria) {
-    console.log(criteria);
     return knex.raw(
       `SELECT e.id, u.id as "owner_id", u.name as "owner_name", e.name, e."type", e."location", e."date", e.information
        FROM events as e

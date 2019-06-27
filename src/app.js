@@ -6,18 +6,21 @@ const helmet = require('helmet');
 const {NODE_ENV} = require('./config');
 const errorHandler = require('./error-handler');
 
+const authRouter = require('./auth/auth-router');
 const eventsRouter = require('./events/events-router');
 const usersRouter = require('./users/users-router');
 const eventUsersRouter = require('./event-users/event-users-router');
 
 const app = express();
 
-const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common';
+const morganOption =
+  NODE_ENV === 'production' ? 'tiny' : 'common';
 
 app.use(morgan(morganOption));
 app.use(cors());
 app.use(helmet());
 
+app.use('/api/auth', authRouter);
 app.use('/api/event', eventsRouter);
 app.use('/api/user', usersRouter);
 app.use('/api/event-users', eventUsersRouter);

@@ -3,6 +3,7 @@ const express = require('express');
 
 const EventUsersService = require('../event-users/event-users-service');
 const EventsService = require('./events-service');
+const {requireAuth} = require('../middleware/jwt-auth');
 const xss = require('xss');
 
 const logger = require('../logger');
@@ -23,6 +24,7 @@ const serializeEvent = event => ({
 
 eventsRouter
   .route('/')
+  .all(requireAuth)
   .get((req, res, next) => {
     EventsService.getAllEvents(req.app.get('db'))
       .then(events => {
@@ -80,7 +82,7 @@ eventsRouter
 
 eventsRouter
   .route('/id/:event_id')
-
+  .all(requireAuth)
   .all((req, res, next) => {
     const {event_id} = req.params;
     EventsService.getById(req.app.get('db'), event_id)
@@ -158,6 +160,7 @@ eventsRouter
 
 eventsRouter
   .route('/filter')
+  .all(requireAuth)
   .get(bodyParser, (req, res, next) => {
     const {name, type, location} = req.body;
     const date = Number(req.body.date);
