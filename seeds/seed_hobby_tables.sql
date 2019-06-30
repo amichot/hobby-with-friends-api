@@ -1,17 +1,17 @@
+-- psql -U dunder-mifflin -d hobby-with-friends -f ./seeds/seed_hobby_tables.sql
 
+TRUNCATE event_users, events RESTART IDENTITY CASCADE, users RESTART IDENTITY CASCADE;
 
-TRUNCATE events_users, events RESTART IDENTITY CASCADE, users RESTART IDENTITY CASCADE;
-
--- insert 4 projects
+-- insert 4 users
 INSERT INTO users
-  (name, full_name, type, location, email, about_me)
+  (name, full_name, password, type, location, email, about_me)
   VALUES 
-    ('Jake123', 'Jake Doe', 'baseball, basketball, weight lifting', 'New York City, NY', 'jake123@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum'),
-    ('SallyS', 'Sally Slim', 'hiking, soccer', 'New Orleans, LA', 'SallyS@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum'),
-    ('Blanket Bill', 'Bill Dobbs', 'video games, board games, frisbee', 'New Orleans, LA', 'BBill@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum'),
-    ('Carl-Seven', 'Carl Holmes', 'basketball, football, baseball', 'New York City, NY', 'carlh123@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum');
+    ('Jake123', 'Jake Doe', 'password', 'baseball, basketball, weight lifting', 'New York City, NY', 'jake123@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum'),
+    ('SallyS', 'Sally Slim', 'Sallypassword', 'hiking, soccer', 'New Orleans, LA', 'SallyS@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum'),
+    ('Blanket Bill', 'Bill Dobbs', 'Billpassword', 'video games, board games, frisbee', 'New Orleans, LA', 'BBill@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum'),
+    ('Carl-Seven', 'Carl Holmes', 'Carlpassword', 'basketball, football, baseball', 'New York City, NY', 'carlh123@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum');
 
--- insert 4 departments
+-- insert 4 events
 INSERT INTO events 
   (name, type, location, date, information)
   VALUES 
@@ -20,7 +20,7 @@ INSERT INTO events
     ('Indoor Soccer 6 on 6', 'soccer', '1501 Dave Dixon Dr, New Orleans LA 70113 United States', 1560898367000, 'this is a test event'),
     ('Basketball 3v3', 'basketball', 'Central Park Manhattan New York City', 1560899358700, 'this is a test event');
 
--- insert some employees
+-- insert users joining events
 INSERT INTO event_users
   (user_id, event_id, role_id)
   VALUES

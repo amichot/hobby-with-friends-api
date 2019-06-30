@@ -3,12 +3,14 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 
 const AuthService = {
-  getUserWithUserName(db, user_name) {
+  getUserWithUserName(db, name) {
+    console.log(name);
     return db('users')
-      .where({user_name})
+      .where({name})
       .first();
   },
   comparePasswords(password, hash) {
+    console.log(password);
     return bcrypt.compare(password, hash);
   },
   createJwt(subject, payload) {
