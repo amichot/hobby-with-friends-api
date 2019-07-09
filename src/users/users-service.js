@@ -10,6 +10,12 @@ const UsersService = {
       .first()
       .then(user => !!user);
   },
+  hasUserWithProfileName(db, profile_name) {
+    return db('users')
+      .where({profile_name})
+      .first()
+      .then(user => !!user);
+  },
   insertUser(db, newUser) {
     return db
       .insert(newUser)

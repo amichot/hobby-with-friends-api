@@ -33,7 +33,13 @@ eventsRouter
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
-    const {name, type, location, information} = req.body;
+    const {
+      owner_id,
+      name,
+      type,
+      location,
+      information,
+    } = req.body;
     const date = Number(req.body.date);
     const newEvent = {
       name,
@@ -41,6 +47,11 @@ eventsRouter
       location,
       date,
       information,
+    };
+    const newEventUser = {
+      event_id: null,
+      user_id: owner_id,
+      role_id: 1,
     };
 
     for (const field of [
@@ -55,22 +66,23 @@ eventsRouter
           error: {message: `'${field}' is required`},
         });
       }
+      if (!newEventUser.user_id) {
+        logger.error(`owner_id is required`);
+        return res.status(400).send({
+          error: {message: `owner_id is required`},
+        });
+      }
     }
 
     EventsService.insertEvent(req.app.get('db'), newEvent)
       .then(event => {
-        const newEventUser = {
-          event_id: event.id,
-          user_id: 1,
-          role_id: 1,
-        };
-
+        newEventUser.event_id = event.id;
         EventUsersService.insertEventUser(
           req.app.get('db'),
           newEventUser
         );
         logger.info(`Event with id ${event.id} created.`);
-        res
+        return res
           .status(201)
           .location(
             path.posix.join(req.originalUrl, `${event.id}`)

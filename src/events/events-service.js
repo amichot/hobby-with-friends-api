@@ -1,7 +1,7 @@
 const EventsService = {
   getAllEvents(knex) {
     return knex.raw(
-      `SELECT e.id, u.id as "owner_id", u.name as "owner_name", e.name, e."type", e."location", e."date", e.information
+      `SELECT e.id, u.id as "owner_id", u.profile_name as "owner_name", e.name, e."type", e."location", e."date", e.information
        FROM events as e
        JOIN event_users as eu
        ON e.id = eu.event_id
@@ -39,7 +39,7 @@ const EventsService = {
   },
   filterEvents(knex, criteria) {
     return knex.raw(
-      `SELECT e.id, u.id as "owner_id", u.name as "owner_name", e.name, e."type", e."location", e."date", e.information
+      `SELECT e.id, u.id as "owner_id", u.profile_name as "owner_name", e.name, e."type", e."location", e."date", e.information
        FROM events as e
        JOIN event_users as eu
        ON e.id = eu.event_id

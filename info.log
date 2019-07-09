@@ -1,0 +1,68 @@
+{"message":"The operator \"undefined\" is not permitted","level":"error"}
+{"message":"insert into \"users\" (\"about_me\", \"date_created\", \"email\", \"full_name\", \"location\", \"name\", \"password\", \"type\") values (DEFAULT, $1, DEFAULT, $2, DEFAULT, $3, $4, DEFAULT) returning * - column \"date_created\" of relation \"users\" does not exist","level":"error"}
+{"message":"\"subject\" must be a string","level":"error"}
+{"message":"user is not defined","level":"error"}
+{"message":"Cannot set headers after they are sent to the client","level":"error"}
+{"message":"Cannot read property 'json' of undefined","level":"error"}
+{"message":"Cannot set headers after they are sent to the client","level":"error"}
+{"message":"insert into \"users\" (\"about_me\", \"email\", \"location\", \"name\", \"password\", \"profile_name\", \"type\") values (DEFAULT, $1, DEFAULT, $2, $3, $4, DEFAULT) returning * - duplicate key value violates unique constraint \"users_email_key\"","level":"error"}
+{"message":"insert into \"users\" (\"about_me\", \"email\", \"location\", \"name\", \"password\", \"profile_name\", \"type\") values (DEFAULT, $1, DEFAULT, $2, $3, $4, DEFAULT) returning * - duplicate key value violates unique constraint \"users_email_key\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":0\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"NaN\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \":9\"","level":"error"}
+{"message":"User with id 0 not found.","level":"error"}
+{"message":"User with id 0 not found.","level":"error"}
+{"message":"User with id 0 not found.","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJpYXQiOjE1NjI0NDI5MDIsInN1YiI6IlRlc3QifQ.JGA7duuzLRmLh0zvRMFAMcuIlsEZOVn-hfI3a9yWHu0\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJpYXQiOjE1NjI0NDI5MDIsInN1YiI6IlRlc3QifQ.JGA7duuzLRmLh0zvRMFAMcuIlsEZOVn-hfI3a9yWHu0\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJpYXQiOjE1NjI0NDMxMzgsInN1YiI6IlRlc3QifQ.8-VTAQh9Zi9YaZsunJ0Egbt6dqirKkoThRQoWBLIpnw\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJpYXQiOjE1NjI0NDMxMzgsInN1YiI6IlRlc3QifQ.8-VTAQh9Zi9YaZsunJ0Egbt6dqirKkoThRQoWBLIpnw\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"null\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJpYXQiOjE1NjIzNzI3NjksInN1YiI6IlRlc3QifQ.OpDAhOvDCBexoFrX07WoLNlEqo7Y1wMmM-CsiDWJRfo\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJpYXQiOjE1NjIzNzI3NjksInN1YiI6IlRlc3QifQ.OpDAhOvDCBexoFrX07WoLNlEqo7Y1wMmM-CsiDWJRfo\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJpYXQiOjE1NjIzNzI3NjksInN1YiI6IlRlc3QifQ.OpDAhOvDCBexoFrX07WoLNlEqo7Y1wMmM-CsiDWJRfo\"","level":"error"}
+{"message":"select * from \"users\" where \"id\" = $1 limit $2 - invalid input syntax for integer: \"[object Object]\"","level":"error"}
+{"message":"\n      SELECT eu.event_id, eu.user_id, eu.role_id, u.name\n      FROM event_users as eu\n      JOIN users as u\n      ON eu.user_id = u.id\n      WHERE eu.event_id = undefined\n       - column \"undefined\" does not exist","level":"error"}
+{"message":"\n      SELECT eu.event_id, eu.user_id, eu.role_id, u.name\n      FROM event_users as eu\n      JOIN users as u\n      ON eu.user_id = u.id\n      WHERE eu.event_id = undefined\n       - column \"undefined\" does not exist","level":"error"}
+{"message":"\n      SELECT eu.event_id, eu.user_id, eu.role_id, u.name\n      FROM event_users as eu\n      JOIN users as u\n      ON eu.user_id = u.id\n      WHERE eu.event_id = undefined\n       - column \"undefined\" does not exist","level":"error"}
+{"message":"\n      SELECT eu.event_id, eu.user_id, eu.role_id, u.name\n      FROM event_users as eu\n      JOIN users as u\n      ON eu.user_id = u.id\n      WHERE eu.event_id = undefined\n       - column \"undefined\" does not exist","level":"error"}
+{"message":"\n      SELECT eu.event_id, eu.user_id, eu.role_id, u.name\n      FROM event_users as eu\n      JOIN users as u\n      ON eu.user_id = u.id\n      WHERE eu.event_id = undefined\n       - column \"undefined\" does not exist","level":"error"}
+{"message":"\n      SELECT eu.event_id, eu.user_id, eu.role_id, u.name\n      FROM event_users as eu\n      JOIN users as u\n      ON eu.user_id = u.id\n      WHERE eu.event_id = undefined\n       - column \"undefined\" does not exist","level":"error"}
+{"message":"\n      SELECT eu.event_id, eu.user_id, eu.role_id, u.name\n      FROM event_users as eu\n      JOIN users as u\n      ON eu.user_id = u.id\n      WHERE eu.event_id = undefined\n       - column \"undefined\" does not exist","level":"error"}
+{"message":"\n      SELECT eu.event_id, eu.user_id, eu.role_id, u.name\n      FROM event_users as eu\n      JOIN users as u\n      ON eu.user_id = u.id\n      WHERE eu.event_id = undefined\n       - column \"undefined\" does not exist","level":"error"}
+{"message":"\n      SELECT eu.event_id, eu.user_id, eu.role_id, u.name\n      FROM event_users as eu\n      JOIN users as u\n      ON eu.user_id = u.id\n      WHERE eu.event_id = undefined\n       - column \"undefined\" does not exist","level":"error"}
+{"message":"SELECT * FROM event_users as eu WHERE eu.event_id = :1 and eu.user_id = : - syntax error at or near \":\"","level":"error"}
+{"message":"Event with id 5 created.","level":"info"}
+{"message":"Event with id 6 created.","level":"info"}
+{"message":"insert into \"events\" (\"date\", \"information\", \"location\", \"name\", \"owner_id\", \"owner_name\", \"type\") values ($1, $2, $3, $4, $5, $6, $7) returning * - column \"owner_id\" of relation \"events\" does not exist","level":"error"}
+{"message":"owner_id is required","level":"error"}
+{"message":"insert into \"events\" (\"date\", \"information\", \"location\", \"name\", \"owner_id\", \"owner_name\", \"type\") values ($1, $2, $3, $4, $5, $6, $7) returning * - column \"owner_id\" of relation \"events\" does not exist","level":"error"}
+{"message":"owner_id is required","level":"error"}
+{"message":"Event with id 7 created.","level":"info"}
+{"message":"SELECT * FROM event_users as eu WHERE eu.event_id = :7 and eu.user_id = :9 - syntax error at or near \":\"","level":"error"}
+{"message":"Event with event id 7 and user id 9 deleted.}","level":"info"}
+{"message":"Event with id 8 created.","level":"info"}
+{"message":"event_id is required","level":"error"}
+{"message":"role_id is required","level":"error"}
+{"message":"Event with id 1 added user with id \n          9.","level":"info"}

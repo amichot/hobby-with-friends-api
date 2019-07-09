@@ -4,13 +4,11 @@ const config = require('../config');
 
 const AuthService = {
   getUserWithUserName(db, name) {
-    console.log(name);
     return db('users')
       .where({name})
       .first();
   },
   comparePasswords(password, hash) {
-    console.log(password);
     return bcrypt.compare(password, hash);
   },
   createJwt(subject, payload) {

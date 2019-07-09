@@ -11,7 +11,7 @@ const bodyParser = express.json();
 const serializeUser = user => ({
   id: user.id,
   name: xss(user.name),
-  full_name: xss(user['full_name']),
+  profile_name: xss(user['profile_name']),
   type: xss(user.type),
   location: xss(user.location),
   email: xss(user.email),
@@ -31,7 +31,7 @@ usersRouter
   .post(bodyParser, (req, res, next) => {
     const {
       password,
-      full_name,
+      profile_name,
       type,
       location,
       email,
@@ -39,7 +39,11 @@ usersRouter
     } = req.body;
     const name = req.body['name'];
 
-    for (const field of ['full_name', 'name', 'password'])
+    for (const field of [
+      'profile_name',
+      'name',
+      'password',
+    ])
       if (!req.body[field])
         return res.status(400).json({
           error: `Missing '${field}' in request body`,
@@ -69,12 +73,11 @@ usersRouter
             const newUser = {
               name,
               password: hashedPassword,
-              full_name,
+              profile_name,
               type,
               location,
               email,
               about_me,
-              date_created: 'now()',
             };
 
             return UsersService.insertUser(
@@ -135,16 +138,14 @@ usersRouter
 
   .patch(bodyParser, (req, res, next) => {
     const {
-      name,
-      full_name,
+      profile_name,
       type,
       location,
       email,
       about_me,
     } = req.body;
     const userToUpdate = {
-      name,
-      full_name,
+      profile_name,
       type,
       location,
       email,

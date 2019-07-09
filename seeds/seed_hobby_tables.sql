@@ -4,7 +4,7 @@ TRUNCATE event_users, events RESTART IDENTITY CASCADE, users RESTART IDENTITY CA
 
 -- insert 4 users
 INSERT INTO users
-  (name, full_name, password, type, location, email, about_me)
+  (name, profile_name, password, type, location, email, about_me)
   VALUES 
     ('Jake123', 'Jake Doe', 'password', 'baseball, basketball, weight lifting', 'New York City, NY', 'jake123@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum'),
     ('SallyS', 'Sally Slim', 'Sallypassword', 'hiking, soccer', 'New Orleans, LA', 'SallyS@gmail.com', 'Ligula curabitur fermentum turpis ante laoreet amet turpis curabitur nec curabitur torquent dolor elementum'),
