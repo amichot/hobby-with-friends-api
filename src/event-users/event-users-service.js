@@ -2,7 +2,7 @@ const EventUsersService = {
   getAllEventUsers(knex) {
     return knex.raw(
       `
-      SELECT eu.event_id, eu.user_id, eu.role_id, u.name
+      SELECT eu.event_id, eu.user_id, eu.role_id, u.profile_name
       FROM event_users as eu
       JOIN users as u
       ON eu.user_id = u.id
@@ -12,7 +12,7 @@ const EventUsersService = {
   getById(knex, id) {
     return knex.raw(
       `
-      SELECT eu.event_id, eu.user_id, eu.role_id, u.name
+      SELECT eu.event_id, eu.user_id, eu.role_id, u.profile_name
       FROM event_users as eu
       JOIN users as u
       ON eu.user_id = u.id

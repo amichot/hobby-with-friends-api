@@ -66,3 +66,13 @@
 {"message":"event_id is required","level":"error"}
 {"message":"role_id is required","level":"error"}
 {"message":"Event with id 1 added user with id \n          9.","level":"info"}
+{"message":"Event with id 3 added user with id \n          9.","level":"info"}
+{"message":"Event with id 5 added user with id \n          9.","level":"info"}
+{"message":"Event with id 4 added user with id \n          9.","level":"info"}
+{"message":"Event with id 2 added user with id \n          9.","level":"info"}
+{"message":"Event with id 6 added user with id \n          9.","level":"info"}
+{"message":"Event with id 1 added user with id \n          11.","level":"info"}
+{"message":"Event with id 3 added user with id \n          11.","level":"info"}
+{"message":"Event with id 5 added user with id \n          11.","level":"info"}
+{"message":"Event with id 4 added user with id \n          11.","level":"info"}
+{"message":"Event with id 2 added user with id \n          11.","level":"info"}
