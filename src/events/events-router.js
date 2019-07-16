@@ -33,14 +33,15 @@ eventsRouter
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
+    console.log('create body....', req.body);
     const {
       owner_id,
       name,
       type,
       location,
       information,
-    } = req.body;
-    const date = Number(req.body.date);
+    } = req.body.event;
+    const date = Number(req.body.event.date);
     const newEvent = {
       name,
       type,
@@ -173,7 +174,8 @@ eventsRouter
 eventsRouter
   .route('/filter')
   .all(requireAuth)
-  .get(bodyParser, (req, res, next) => {
+  .post(bodyParser, (req, res, next) => {
+    console.log(req.body);
     const {name, type, location} = req.body;
     const date = Number(req.body.date);
     const criteria = {
