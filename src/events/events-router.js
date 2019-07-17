@@ -3,6 +3,7 @@ const express = require('express');
 
 const EventUsersService = require('../event-users/event-users-service');
 const EventsService = require('./events-service');
+const {requireAuth} = require('../middleware/jwt-auth');
 const xss = require('xss');
 
 const logger = require('../logger');
@@ -23,6 +24,7 @@ const serializeEvent = event => ({
 
 eventsRouter
   .route('/')
+  .all(requireAuth)
   .get((req, res, next) => {
     EventsService.getAllEvents(req.app.get('db'))
       .then(events => {
@@ -31,14 +33,26 @@ eventsRouter
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
-    const {name, type, location, information} = req.body;
-    const date = Number(req.body.date);
+    console.log('create body....', req.body);
+    const {
+      owner_id,
+      name,
+      type,
+      location,
+      information,
+    } = req.body.event;
+    const date = Number(req.body.event.date);
     const newEvent = {
       name,
       type,
       location,
       date,
       information,
+    };
+    const newEventUser = {
+      event_id: null,
+      user_id: owner_id,
+      role_id: 1,
     };
 
     for (const field of [
@@ -53,22 +67,23 @@ eventsRouter
           error: {message: `'${field}' is required`},
         });
       }
+      if (!newEventUser.user_id) {
+        logger.error(`owner_id is required`);
+        return res.status(400).send({
+          error: {message: `owner_id is required`},
+        });
+      }
     }
 
     EventsService.insertEvent(req.app.get('db'), newEvent)
       .then(event => {
-        const newEventUser = {
-          event_id: event.id,
-          user_id: 1,
-          role_id: 1,
-        };
-
+        newEventUser.event_id = event.id;
         EventUsersService.insertEventUser(
           req.app.get('db'),
           newEventUser
         );
         logger.info(`Event with id ${event.id} created.`);
-        res
+        return res
           .status(201)
           .location(
             path.posix.join(req.originalUrl, `${event.id}`)
@@ -80,7 +95,7 @@ eventsRouter
 
 eventsRouter
   .route('/id/:event_id')
-
+  .all(requireAuth)
   .all((req, res, next) => {
     const {event_id} = req.params;
     EventsService.getById(req.app.get('db'), event_id)
@@ -158,7 +173,9 @@ eventsRouter
 
 eventsRouter
   .route('/filter')
-  .get(bodyParser, (req, res, next) => {
+  .all(requireAuth)
+  .post(bodyParser, (req, res, next) => {
+    console.log(req.body);
     const {name, type, location} = req.body;
     const date = Number(req.body.date);
     const criteria = {

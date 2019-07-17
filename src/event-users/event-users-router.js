@@ -12,7 +12,7 @@ const serializeEventUser = event_user => ({
   event_id: Number(event_user.event_id),
   user_id: Number(event_user.user_id),
   role_id: Number(event_user.role_id),
-  user_name: xss(event_user.name),
+  profile_name: xss(event_user.profile_name),
 });
 
 eventUsersRouter
