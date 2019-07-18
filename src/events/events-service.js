@@ -38,6 +38,17 @@ const EventsService = {
       .update(newEventFields);
   },
   filterEvents(knex, criteria) {
+    let newType = criteria.type;
+    let typeArray = newType.replace(/,/g, '').split(' ');
+    let result = '';
+    typeArray.forEach((e, i) => {
+      typeArray.length - 1 === i
+        ? (result += `${e}`)
+        : (result += `${e}|`);
+    });
+    console.log('criteria', criteria);
+    console.log('typeArray', typeArray);
+
     return knex.raw(
       `SELECT e.id, u.id as "owner_id", u.profile_name as "owner_name", e.name, e."type", e."location", e."date", e.information
        FROM events as e
@@ -48,7 +59,7 @@ const EventsService = {
        AND eu.event_id = e.id
        WHERE eu.role_id = 1
        AND e.name ilike '%${criteria.name}%'
-       AND e."type" ilike '%${criteria.type}%'
+       AND e."type" SIMILAR TO '%(${result})%'
        AND e."location" ilike '%${criteria.location}%'
        AND e."date" >= ${criteria.date};
     `

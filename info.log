@@ -1,1 +1,5 @@
 
+{"message":"typeArray.split is not a function","level":"error"}
+{"message":"typeArray.split is not a function","level":"error"}
+{"message":"Cannot read property 'split' of undefined","level":"error"}
+{"message":"e is not defined","level":"error"}
