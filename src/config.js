@@ -6,4 +6,6 @@ module.exports = {
     'postgresql://dunder-mifflin:1@localhost/hobby-with-friends',
   JWT_SECRET:
     process.env.JWT_SECRET || 'change-this-secret',
+  CLIENT_ORIGIN:
+    'https://hobby-with-friends.adrianslolacc.now.sh',
 };
