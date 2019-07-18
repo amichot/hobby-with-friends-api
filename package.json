@@ -2,7 +2,7 @@
 	"name": "hobby-with-friends-api",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "src/server.js",
 	"scripts": {
 		"test": "mocha --require test/setup.js",
 		"migrate": "postgrator --config postgrator-config.js",
@@ -45,5 +45,8 @@
 		"semi": true,
 		"tabWidth": 2,
 		"trailingComma": "es5"
-	}
+	},
+	"engines": {
+		"node": "10.15.3"
+	  }
 }
